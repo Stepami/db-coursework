@@ -12,9 +12,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CourseWork.Data
+namespace CourseWork.Data.Scrapers
 {
-    class CoursesFromUdemy
+    class UdemyScraper
     {
         private static RestClient MakeClient()
         {
@@ -31,7 +31,7 @@ namespace CourseWork.Data
 
         private readonly RestClient client;
 
-        public CoursesFromUdemy() => client = MakeClient();
+        public UdemyScraper() => client = MakeClient();
 
         public async IAsyncEnumerable<IEnumerable<Course>> GetCoursesAsync()
         {

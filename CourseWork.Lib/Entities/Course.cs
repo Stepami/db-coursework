@@ -43,8 +43,6 @@ namespace CourseWork.Lib.Entities
         /// </summary>
         public PriceDetail PriceDetail { get; set; }
 
-        public Course() : base() { }
-
         protected override int DefaultID() => 0;
     }
 }

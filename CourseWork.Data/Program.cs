@@ -5,6 +5,7 @@ using CourseWork.Lib;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using CourseWork.Data.Scrapers;
 
 namespace CourseWork.Data
 {
@@ -12,19 +13,18 @@ namespace CourseWork.Data
     {
         static async Task Main(string[] args)
         {
-            using (var db = new CWContext())
-            {
-                db.Database.Migrate();
+            using var db = new CWContext();
+            db.Database.Migrate();
 
-                db.SaveChanges();
-            }
+            db.SaveChanges();
 
             //await FillCourses();
+            //await FillAreas();
         }
 
         static async Task FillCourses()
         {
-            var udemy = new CoursesFromUdemy();
+            var udemy = new UdemyScraper();
             var courses = new List<Course>();
 
             await foreach (var slice in udemy.GetCoursesAsync())
@@ -34,11 +34,19 @@ namespace CourseWork.Data
 
             courses = courses.GroupBy(c => c.ID).Select(g => g.First()).ToList();
 
-            using (var db = new CWContext())
-            {
-                await db.Courses.AddRangeAsync(courses);
-                await db.SaveChangesAsync();
-            }
+            using var db = new CWContext();
+            await db.Courses.AddRangeAsync(courses);
+            await db.SaveChangesAsync();
+        }
+
+        static async Task FillAreas()
+        {
+            var hh = new HeadHunterScraper();
+            var areas = await hh.GetAreasAsync();
+
+            using var db = new CWContext();
+            await db.Areas.AddRangeAsync(areas);
+            await db.SaveChangesAsync();
         }
     }
 }

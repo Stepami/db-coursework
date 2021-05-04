@@ -13,6 +13,10 @@ namespace CourseWork.Lib
     {
         public virtual DbSet<Course> Courses { get; set; }
 
+        public virtual DbSet<Area> Areas { get; set; }
+
+        public virtual DbSet<Specialization> Specializations { get; set; }
+
         /// <summary>
         /// Настройка подключения к БД
         /// </summary>
