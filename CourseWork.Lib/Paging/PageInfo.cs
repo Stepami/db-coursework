@@ -20,7 +20,7 @@ namespace CourseWork.Lib.Paging
         /// <summary>
         /// Кол-во объектов на странице
         /// </summary>
-        public int PageSize { get; } //todo: вынести в конфиг
+        public int PageSize { get; set; } //todo: вынести в конфиг
 
         /// <summary>
         /// Всего объектов
@@ -30,7 +30,7 @@ namespace CourseWork.Lib.Paging
         /// <summary>
         /// Всего страниц
         /// </summary>
-        public int TotalPages => (int)Math.Ceiling((decimal)TotalItems / PageSize) < 1 ? 1 : (int)Math.Ceiling((decimal)TotalItems / PageSize);
+        public int TotalPages { get; }
 
         /// <summary>
         /// Параметризированный конструктор
@@ -46,6 +46,7 @@ namespace CourseWork.Lib.Paging
             {
                 PageSize = 100;
             }
+            TotalPages = (int)Math.Ceiling((decimal)TotalItems / PageSize) < 1 ? 1 : (int)Math.Ceiling((decimal)TotalItems / PageSize);
         }
     }
 }

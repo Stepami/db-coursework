@@ -23,6 +23,6 @@ namespace CourseWork.API.Controllers
 
         [HttpGet]
         [Route("paged/{page}")]
-        public async Task<PagedList<T>> GetPagedAsync(int page) => await PagedList<T>.CreateAsync(db.Set<T>().AsNoTracking(), page);
+        public async Task<PagedList<T>> GetPagedAsync(int page) => await PagedList<T>.CreateAsync(db.Set<T>(), page);
     }
 }

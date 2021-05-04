@@ -26,7 +26,11 @@ namespace CourseWork.Lib.Paging
         /// <summary>
         /// Конструктор
         /// </summary>
-        private PagedList(IEnumerable<T> entities, PageInfo pageInfo) => (Entities, PageInfo) = (entities, pageInfo);
+        private PagedList(IEnumerable<T> entities, PageInfo pageInfo)
+        {
+            (Entities, PageInfo) = (entities, pageInfo);
+            PageInfo.PageSize = Entities.Count();
+        }
 
         /// <summary>
         /// Отобразить коллекцию из T в U
