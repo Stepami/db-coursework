@@ -13,7 +13,7 @@ namespace CourseWork.API.Controllers
 {
     public class EntitiesController<T, IdType> : ApiController where T : Entity<IdType>, new()
     {
-        private readonly CWContext db;
+        protected readonly CWContext db;
 
         public EntitiesController(CWContext db) => this.db = db;
 
