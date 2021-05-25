@@ -1,8 +1,11 @@
+using CourseWork.API.Handlers;
 using CourseWork.Lib;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,16 +34,46 @@ namespace CourseWork.API
 
             services.AddCors();
 
-            services.AddControllers().AddNewtonsoftJson(setup =>
-            {
-                setup.SerializerSettings.ContractResolver = Utils.Settings.ContractResolver;
-                setup.SerializerSettings.ReferenceLoopHandling = Utils.Settings.ReferenceLoopHandling;
-                setup.SerializerSettings.Formatting = Utils.Settings.Formatting;
-            });
+            services
+                .AddControllers(opt => 
+                {
+                    opt.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
+                })
+                .AddNewtonsoftJson(setup =>
+                {
+                    setup.SerializerSettings.ContractResolver = Utils.Settings.ContractResolver;
+                    setup.SerializerSettings.ReferenceLoopHandling = Utils.Settings.ReferenceLoopHandling;
+                    setup.SerializerSettings.Formatting = Utils.Settings.Formatting;
+                });
+
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CourseWork.API", Version = "v1" });
+                c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "basic",
+                    In = ParameterLocation.Header,
+                    Description = "Basic Authorization header using the Bearer scheme."
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "basic"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
         }
 
@@ -55,6 +88,7 @@ namespace CourseWork.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseCors(builder => builder
