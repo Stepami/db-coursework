@@ -17,6 +17,34 @@ namespace CourseWork.Lib
 
         public virtual DbSet<Specialization> Specializations { get; set; }
 
+        public virtual DbSet<User> Users { get; set; }
+
+        public virtual DbSet<Trajectory> Trajectories { get; set; }
+
+        public virtual DbSet<TrajectoryElement> TrajectoryElements { get; set; }
+
+        /// <summary>
+        /// Регистрация пользователя
+        /// </summary>
+        /// <param name="login">Логин</param>
+        /// <param name="password">Пароль</param>
+        /// <returns>Новый пользователь</returns>
+        public async Task<User> RegisterAsync(string login, string password)
+        {
+            User user = new() { Login = login, Password = password };
+            Users.Add(user);
+            await SaveChangesAsync();
+            return user;
+        }
+
+        /// <summary>
+        /// Аутентификация пользователя
+        /// </summary>
+        /// <param name="login">Логин</param>
+        /// <param name="password">Пароль</param>
+        /// <returns>Пользователь либо <see langword="null" />, если логин или пароль неверны</returns>
+        public async Task<User> AuthAsync(string login, string password) => await Users.FirstOrDefaultAsync(u => u.Login == login && u.Password == password);
+
         /// <summary>
         /// Настройка подключения к БД
         /// </summary>
@@ -35,7 +63,15 @@ namespace CourseWork.Lib
         /// <param name="modelBuilder">строитель модели</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Trajectory>()
+                .HasOne(t => t.Specialization)
+                .WithMany()
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<TrajectoryElement>()
+                .HasOne(te => te.Course)
+                .WithMany()
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
