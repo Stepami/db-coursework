@@ -11,11 +11,9 @@ using System.Threading.Tasks;
 
 namespace CourseWork.API.Controllers
 {
-    public class EntitiesController<T, IdType> : ApiController where T : Entity<IdType>, new()
+    public class EntitiesController<T, IdType> : DbApiController where T : Entity<IdType>, new()
     {
-        protected readonly CWContext db;
-
-        public EntitiesController(CWContext db) => this.db = db;
+        public EntitiesController(CWContext db) : base(db) { }
 
         [HttpGet]
         [Route("{id}")]
