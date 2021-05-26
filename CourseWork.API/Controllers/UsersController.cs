@@ -20,9 +20,14 @@ namespace CourseWork.API.Controllers
         [Route("api/register")]
         public async Task<User> Register(string login, string password) => await db.RegisterAsync(login, password);
 
+        [Authorize]
         [HttpPost]
         [Route("api/auth")]
-        public async Task<User> Auth(string login, string password) => await db.AuthAsync(login, password);
+        public async Task<User> Auth()
+        {
+            var id = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            return await db.Users.FindAsync(id);
+        }
 
         [Authorize]
         [Route("api/user/trajectories/new")]
