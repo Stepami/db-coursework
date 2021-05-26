@@ -66,7 +66,7 @@ namespace CourseWork.Lib
             modelBuilder.Entity<Trajectory>()
                 .HasOne(t => t.Specialization)
                 .WithMany()
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<TrajectoryElement>()
                 .HasOne(te => te.Course)
