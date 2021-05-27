@@ -17,12 +17,12 @@ namespace CourseWork.API.Controllers
         public UsersController(CWContext db) : base(db) { }
 
         [HttpPost]
-        [Route("api/register")]
+        [Route("register")]
         public async Task<User> Register(string login, string password) => await db.RegisterAsync(login, password);
 
         [Authorize]
         [HttpPost]
-        [Route("api/auth")]
+        [Route("auth")]
         public async Task<User> Auth()
         {
             var id = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -30,7 +30,7 @@ namespace CourseWork.API.Controllers
         }
 
         [Authorize]
-        [Route("api/user/trajectories/new")]
+        [Route("user/trajectories/new")]
         [HttpPost]
         public async Task<Trajectory> NewTrajectory(string specId)
         {

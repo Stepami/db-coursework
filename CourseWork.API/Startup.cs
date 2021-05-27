@@ -92,9 +92,10 @@ namespace CourseWork.API
             app.UseAuthorization();
 
             app.UseCors(builder => builder
-                .AllowAnyOrigin()
+                .WithOrigins("http://localhost:9000")
                 .AllowAnyMethod()
-                .AllowAnyHeader());
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseEndpoints(endpoints =>
             {

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace CourseWork.API.Controllers
 {
+    [Route("api/[controller]/")]
     public class EntitiesController<T, IdType> : DbApiController where T : Entity<IdType>, new()
     {
         public EntitiesController(CWContext db) : base(db) { }

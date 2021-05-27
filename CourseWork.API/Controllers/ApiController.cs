@@ -11,6 +11,6 @@ namespace CourseWork.API.Controllers
     /// </summary>
     [ApiController]
     [Produces("application/json")]
-    [Route("api/[controller]/")]
+    [Route("api/")]
     public class ApiController : ControllerBase { }
 }
