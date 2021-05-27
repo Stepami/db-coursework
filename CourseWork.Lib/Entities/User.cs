@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -36,7 +37,26 @@ namespace CourseWork.Lib.Entities
         /// </summary>
         /// <param name="specialization">Требуемая специализация после прохождения траектории</param>
         /// <returns>Новая траектория</returns>
-        public Trajectory NewTrajectory(Specialization specialization) => new() { Specialization = specialization, UserID = ID };
+        public Trajectory NewTrajectory(Specialization specialization)
+        {
+            Trajectory trajectory = new() { Specialization = specialization, UserID = ID };
+
+            using (var db = new CWContext())
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    var course = db.Courses.OrderBy(c => Guid.NewGuid()).FirstOrDefault();
+                    trajectory.TrajectoryElements.Add(new TrajectoryElement
+                    {
+                        Course = course,
+                        Order = i,
+                        TrajectoryID = trajectory.ID
+                    });
+                }
+            }
+
+            return trajectory;
+        }
 
         protected override Guid DefaultID() => Guid.NewGuid();
     }

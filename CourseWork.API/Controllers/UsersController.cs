@@ -40,7 +40,10 @@ namespace CourseWork.API.Controllers
                 var id = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var user = await db.Users.FindAsync(id);
                 var trajectory = user.NewTrajectory(spec);
-
+                foreach (var course in trajectory.TrajectoryElements.Select(te => te.Course))
+                {
+                    db.Entry(course).State = EntityState.Unchanged;
+                }
                 db.Trajectories.Add(trajectory);
                 await db.SaveChangesAsync();
 
