@@ -30,7 +30,7 @@ namespace CourseWork.API.Controllers
         }
 
         [Authorize]
-        [Route("user/trajectory/{id}")]
+        [Route("user/trajectory/{specId}")]
         [HttpGet]
         public async Task<Trajectory> GetTrajectoryBySpec(string specId)
         {
