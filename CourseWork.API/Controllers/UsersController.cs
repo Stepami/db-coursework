@@ -30,12 +30,13 @@ namespace CourseWork.API.Controllers
         }
 
         [Authorize]
-        [Route("user/trajectory/{specId}")]
         [HttpGet]
-        public async Task<Trajectory> GetTrajectoryBySpec(string specId)
+        [Route("user/trajectories")]
+        public async Task<IEnumerable<Trajectory>> TrajectoriesOfCurrentUser()
         {
             var id = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            return await db.Trajectories.FirstOrDefaultAsync(t => t.UserID == id && t.Specialization.ID == specId);
+            var user = await db.Users.FindAsync(id);
+            return user.Trajectories;
         }
 
         [Authorize]
