@@ -1,63 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="CourseWork.Lib.Entities.Area">
-    <Position X="6.25" Y="5.5" Width="3" />
+    <Position X="9" Y="3.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAEAAEA=</HashCode>
       <FileName>Entities\Area.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CourseWork.Lib.Entities.Course">
-    <Position X="12.5" Y="5.5" Width="2" />
+    <Position X="10.75" Y="6.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAwAEAAAAAQAAAAAAAAAAEACAAAAAEAAAA=</HashCode>
       <FileName>Entities\Course.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CourseWork.Lib.Entities.Entity&lt;IdType&gt;">
-    <Position X="10.25" Y="0.75" Width="1.75" />
+    <Position X="12.75" Y="1" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Entities\Entity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CourseWork.Lib.Entities.PriceDetail">
-    <Position X="12.5" Y="8.75" Width="2" />
+    <Position X="12.5" Y="3.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAACACAAAAAAAAAACAAQAAAA=</HashCode>
       <FileName>Entities\PriceDetail.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CourseWork.Lib.Entities.Specialization">
-    <Position X="15.25" Y="5.75" Width="1.75" />
+    <Position X="6.75" Y="3.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAIAAAAAEAAAA=</HashCode>
       <FileName>Entities\Specialization.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CourseWork.Lib.Entities.Trajectory">
-    <Position X="2" Y="5.5" Width="3.5" />
+    <Position X="7.75" Y="0.75" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAAAAAAAAAAAgAAAAAAAAAAAAAAAUAAEA=</HashCode>
       <FileName>Entities\Trajectory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CourseWork.Lib.Entities.TrajectoryElement">
-    <Position X="10.25" Y="5.5" Width="1.75" />
+    <Position X="8.25" Y="7" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAEgBAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Entities\TrajectoryElement.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CourseWork.Lib.Entities.User">
-    <Position X="18" Y="5.75" Width="2.75" />
+    <Position X="13.25" Y="6.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAAAAABAAAAAAAAAAACAAAQAAEAAAA=</HashCode>
       <FileName>Entities\User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="CourseWork.Lib.Entities.AreaType">
-    <Position X="13.25" Y="2.75" Width="1.5" />
+    <Position X="8" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Area.cs</FileName>
