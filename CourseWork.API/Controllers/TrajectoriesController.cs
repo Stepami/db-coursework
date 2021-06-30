@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CourseWork.API.Controllers
@@ -28,6 +29,20 @@ namespace CourseWork.API.Controllers
                 await db.SaveChangesAsync();
             }
             return step;
+        }
+
+        [Authorize]
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task DeleteById(Guid id)
+        {
+            var userID = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var trajectory = await db.Trajectories.FirstOrDefaultAsync(t => t.ID == id && t.UserID == userID);
+            if (trajectory != null)
+            {
+                db.Trajectories.Remove(trajectory);
+                await db.SaveChangesAsync();
+            }
         }
     }
 }
