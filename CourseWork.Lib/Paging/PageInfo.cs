@@ -38,7 +38,7 @@ namespace CourseWork.Lib.Paging
         public PageInfo(int pn, int ti)
         {
             (PageNumber, TotalItems) = (pn, ti);
-            if (pn == 0)
+            if (pn == 0 && ti != 0)
             {
                 PageSize = ti;
             }
