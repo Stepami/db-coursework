@@ -45,6 +45,7 @@ namespace CourseWork.Lib.Entities
         /// <summary>
         /// Специализации в этой области
         /// </summary>
+        [JsonIgnore]
         public virtual ICollection<Specialization> Specializations { get; set; } = new List<Specialization>();
 
         protected override string DefaultID() => Guid.NewGuid().ToString();
