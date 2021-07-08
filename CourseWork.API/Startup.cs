@@ -13,7 +13,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CourseWork.API
@@ -74,6 +76,13 @@ namespace CourseWork.API
                         Array.Empty<string>()
                     }
                 });
+                var solutionName = Assembly.GetExecutingAssembly().GetName().Name.Split('.')[0];
+                string solutionDirectory = Directory.GetParent(Environment.CurrentDirectory).FullName;
+                var pathToXmlDocumentsToLoad = AppDomain.CurrentDomain.GetAssemblies()
+                    .Where(x => x.FullName.StartsWith(solutionName))
+                    .Select(x => $@"{solutionDirectory}\{x.GetName().Name}\bin\{x.GetName().Name}.xml")
+                    .ToList();
+                pathToXmlDocumentsToLoad.ForEach(path => c.IncludeXmlComments(path));
             });
         }
 

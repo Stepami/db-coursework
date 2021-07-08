@@ -16,6 +16,11 @@ namespace CourseWork.API.Controllers
     {
         public SpecializationsController(CWContext db) : base(db) { }
 
+        /// <summary>
+        /// Получение траектории, которую пользователь сгенерировал для получения специальности
+        /// </summary>
+        /// <param name="specId">Идентификатор выбранной специальности</param>
+        /// <returns></returns>
         [Authorize]
         [HttpGet]
         [Route("{specId}/trajectory")]
