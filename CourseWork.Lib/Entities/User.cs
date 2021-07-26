@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -33,30 +32,18 @@ namespace CourseWork.Lib.Entities
         public string Password { get; set; }
 
         /// <summary>
+        /// Генератор траектории
+        /// </summary>
+        [NotMapped]
+        public ITrajectoryGenerator Generator { private get; set; }
+
+        /// <summary>
         /// Создание новой траектории
         /// </summary>
         /// <param name="specialization">Требуемая специализация после прохождения траектории</param>
+        /// <param name="size">Размер траектории (кол-во этапов)</param>
         /// <returns>Новая траектория</returns>
-        public Trajectory NewTrajectory(Specialization specialization)
-        {
-            Trajectory trajectory = new() { Specialization = specialization, UserID = ID };
-
-            using (var db = new CWContext())
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    var course = db.Courses.OrderBy(c => Guid.NewGuid()).FirstOrDefault();
-                    trajectory.TrajectoryElements.Add(new TrajectoryElement
-                    {
-                        Course = course,
-                        Order = i,
-                        TrajectoryID = trajectory.ID
-                    });
-                }
-            }
-
-            return trajectory;
-        }
+        public Trajectory NewTrajectory(Specialization specialization, int size) => Generator.Generate(specialization, ID, size);
 
         protected override Guid DefaultID() => Guid.NewGuid();
     }

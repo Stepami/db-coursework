@@ -1,4 +1,5 @@
-﻿using CourseWork.Lib;
+﻿using CourseWork.API.Generators;
+using CourseWork.Lib;
 using CourseWork.Lib.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -42,14 +43,17 @@ namespace CourseWork.API.Controllers
         [Authorize]
         [Route("user/trajectories/new")]
         [HttpPost]
-        public async Task<Trajectory> NewTrajectory(string specId)
+        public async Task<Trajectory> NewTrajectory(string specId, int size = 10)
         {
             var spec = await db.Specializations.FirstOrDefaultAsync(s => s.ID == specId);
             if (spec != null)
             {
                 var id = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var user = await db.Users.FindAsync(id);
-                var trajectory = user.NewTrajectory(spec);
+
+                user.Generator = new RestNlpGenerator(db);
+                var trajectory = user.NewTrajectory(spec, size);
+
                 foreach (var course in trajectory.TrajectoryElements.Select(te => te.Course))
                 {
                     db.Entry(course).State = EntityState.Unchanged;
