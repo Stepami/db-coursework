@@ -26,6 +26,7 @@ namespace CourseWork.API
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false)
+                .AddJsonFile("hosting.json", optional: true)
                 .AddCommandLine(args)
                 .Build();
 
