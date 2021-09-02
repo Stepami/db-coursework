@@ -18,7 +18,7 @@ namespace CourseWork.API.Controllers
 
         [Authorize]
         [HttpPut]
-        [Route("{id}/pass")]
+        [Route("[controller]/{id}/pass")]
         public async Task<TrajectoryElement> PassTrajectoryStep(Guid id)
         {
             var trajectory = await db.Trajectories.FindAsync(id);
@@ -33,7 +33,7 @@ namespace CourseWork.API.Controllers
 
         [Authorize]
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[controller]/{id}")]
         public async Task DeleteById(Guid id)
         {
             var userID = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);

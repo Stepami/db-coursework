@@ -54,10 +54,6 @@ namespace CourseWork.API.Controllers
                 user.Generator = new RestNlpGenerator(db);
                 var trajectory = user.NewTrajectory(spec, size);
 
-                foreach (var course in trajectory.TrajectoryElements.Select(te => te.Course))
-                {
-                    db.Entry(course).State = EntityState.Unchanged;
-                }
                 db.Trajectories.Add(trajectory);
                 await db.SaveChangesAsync();
 
