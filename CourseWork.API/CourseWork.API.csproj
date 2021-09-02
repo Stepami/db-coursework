@@ -5,8 +5,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>CourseWork.API.xml</DocumentationFile>
+    <DocumentationFile>bin\CourseWork.API.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <OutputPath>bin\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

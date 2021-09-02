@@ -80,7 +80,7 @@ namespace CourseWork.API
                 var solutionName = Assembly.GetExecutingAssembly().GetName().Name.Split('.')[0];
                 var pathToXmlDocumentsToLoad = AppDomain.CurrentDomain.GetAssemblies()
                     .Where(x => x.FullName.StartsWith(solutionName))
-                    .Select(x => $"{x.GetName().Name}.xml")
+                    .Select(x => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{x.GetName().Name}.xml"))
                     .ToList();
                 pathToXmlDocumentsToLoad.ForEach(path => c.IncludeXmlComments(path));
             });
