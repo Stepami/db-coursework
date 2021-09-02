@@ -78,11 +78,9 @@ namespace CourseWork.API
                     }
                 });
                 var solutionName = Assembly.GetExecutingAssembly().GetName().Name.Split('.')[0];
-                string solutionDirectory = Directory.GetParent(Environment.CurrentDirectory).FullName;
-                var sep = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"\" : "/";
                 var pathToXmlDocumentsToLoad = AppDomain.CurrentDomain.GetAssemblies()
                     .Where(x => x.FullName.StartsWith(solutionName))
-                    .Select(x => $@"{solutionDirectory}{sep}{x.GetName().Name}{sep}bin{sep}{x.GetName().Name}.xml")
+                    .Select(x => $"{x.GetName().Name}.xml")
                     .ToList();
                 pathToXmlDocumentsToLoad.ForEach(path => c.IncludeXmlComments(path));
             });
